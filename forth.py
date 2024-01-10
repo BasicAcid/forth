@@ -22,6 +22,13 @@ def bin_op(stack, word):
     elif word == "/":
         return stack.append(op_1 / op_2)
 
+def dup(stack):
+    if stack:
+        top_element = stack[-1]
+        stack.append(top_element)
+    else:
+        print("dup fail: Stack is empty.")
+
 def execute(input_str):
 
     words = input_str.split()
@@ -35,6 +42,9 @@ def execute(input_str):
 
         elif word in ['+', '-', '*', '/']:
             bin_op(stack, word)
+
+        elif word == "dup":
+            dup(stack)
 
         elif word == '.':
             if stack:
