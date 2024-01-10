@@ -62,6 +62,9 @@ def emit(stack):
 def cr(stack):
     print("\n")
 
+def nip(stack):
+    swap(stack)
+    drop(stack)
 
 def peek(stack):
     """
@@ -104,6 +107,9 @@ def execute(input_str):
 
         elif word == "cr":
             cr(stack)
+
+        elif word == "nip":
+            nip(stack)
 
         elif word == ".S":
             peek(stack)
