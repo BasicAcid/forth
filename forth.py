@@ -53,6 +53,19 @@ def rot(stack):
     else:
         stack[-3], stack[-2], stack[-1] = stack[-2], stack[-1], stack[-3]
 
+def emit(stack):
+    if stack:
+        print(chr(stack.pop()))
+    else:
+        print("drop fail: Stack is empty.")
+
+def peek(stack):
+    """
+    TODO
+    .S non-destructive print.
+    """
+    pass
+
 def execute(input_str):
 
     words = input_str.split()
@@ -81,6 +94,12 @@ def execute(input_str):
 
         elif word == "rot":
             rot(stack)
+
+        elif word == "emit":
+            emit(stack)
+
+        elif word == ".S":
+            peek(stack)
 
         elif word == '.':
             if stack:
