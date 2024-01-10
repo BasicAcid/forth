@@ -3,7 +3,27 @@
 stack = []
 definitions = {}
 
+
+def bin_op(stack, word):
+
+    if len(stack) < 2:
+        print(f"Error: Not enough args for: {word}")
+        return
+
+    op_2 = stack.pop()
+    op_1 = stack.pop()
+
+    if word == "+":
+        return stack.append(op_1 + op_2)
+    elif word == "-":
+        return stack.append(op_1 - op_2)
+    elif word == "*":
+        return stack.append(op_1 * op_2)
+    elif word == "/":
+        return stack.append(op_1 / op_2)
+
 def execute(input_str):
+
     words = input_str.split()
 
     i = 0
@@ -13,43 +33,8 @@ def execute(input_str):
         if word.isdigit():
             stack.append(int(word))
 
-        # TODO: create func for this block.
-        elif word == '+':
-            if len(stack) < 2:
-                print(f"Error: Not enough op_s for: {word}")
-                return
-            else:
-                op_2 = stack.pop()
-                op_1 = stack.pop()
-                result = op_1 + op_2
-                stack.append(result)
-        elif word == '-':
-            if len(stack) < 2:
-                print(f"Error: Not enough op_s for: {word}")
-                return
-            else:
-                op_2 = stack.pop()
-                op_1 = stack.pop()
-                result = op_1 - op_2
-                stack.append(result)
-        elif word == '*':
-            if len(stack) < 2:
-                print(f"Error: Not enough op_s for: {word}")
-                return
-            else:
-                op_2 = stack.pop()
-                op_1 = stack.pop()
-                result = op_1 * op_2
-                stack.append(result)
-        elif word == '/':
-            if len(stack) < 2:
-                print(f"Error: Not enough op_s for: {word}")
-                return
-            else:
-                op_2 = stack.pop()
-                op_1 = stack.pop()
-                result = op_1 / op_2
-                stack.append(result)
+        elif word in ['+', '-', '*', '/']:
+            bin_op(stack, word)
 
         elif word == '.':
             if stack:
@@ -59,10 +44,13 @@ def execute(input_str):
 
         elif word == ':':
             i = define_word(words, i + 1)
+
         elif word in definitions:
             execute(definitions[word])
+
         else:
             print("Unknown word:", word)
+
         i += 1
 
 def define_word(words, start_index):
