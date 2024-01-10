@@ -47,6 +47,12 @@ def over(stack):
     else:
         stack.append(stack[-2])
 
+def rot(stack):
+    if len(stack) < 3:
+        print(f"Error: Not enough args for: rot")
+    else:
+        stack[-3], stack[-2], stack[-1] = stack[-2], stack[-1], stack[-3]
+
 def execute(input_str):
 
     words = input_str.split()
@@ -72,6 +78,9 @@ def execute(input_str):
 
         elif word == "over":
             over(stack)
+
+        elif word == "rot":
+            rot(stack)
 
         elif word == '.':
             if stack:
