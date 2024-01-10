@@ -33,7 +33,14 @@ def drop(stack):
     if stack:
         stack.pop()
     else:
-        print("dup fail: Stack is empty.")
+        print("drop fail: Stack is empty.")
+
+def swap(stack):
+    if len(stack) < 2:
+        print(f"Error: Not enough args for: swap")
+        return
+    else:
+        stack[-1], stack[-2] = stack[-2], stack[-1]
 
 def execute(input_str):
 
@@ -54,6 +61,9 @@ def execute(input_str):
 
         elif word == "drop":
             drop(stack)
+
+        elif word == "swap":
+            swap(stack)
 
         elif word == '.':
             if stack:
