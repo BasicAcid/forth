@@ -59,6 +59,10 @@ def emit(stack):
     else:
         print("drop fail: Stack is empty.")
 
+def cr(stack):
+    print("\n")
+
+
 def peek(stack):
     """
     TODO
@@ -98,6 +102,9 @@ def execute(input_str):
         elif word == "emit":
             emit(stack)
 
+        elif word == "cr":
+            cr(stack)
+
         elif word == ".S":
             peek(stack)
 
@@ -115,7 +122,6 @@ def execute(input_str):
 
         else:
             print("Unknown word:", word)
-
         i += 1
 
 def define_word(words, start_index):
@@ -139,7 +145,11 @@ def define_word(words, start_index):
     return end_index
 
 while True:
+    # TODO
+    # This is problematic, because the input function add a new line.
+    # That's not the case on most implementations.
     input_str = input("Forth> ")
+
     if input_str.lower() == 'quit':
         break
     execute(input_str)
