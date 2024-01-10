@@ -29,6 +29,12 @@ def dup(stack):
     else:
         print("dup fail: Stack is empty.")
 
+def drop(stack):
+    if stack:
+        stack.pop()
+    else:
+        print("dup fail: Stack is empty.")
+
 def execute(input_str):
 
     words = input_str.split()
@@ -45,6 +51,9 @@ def execute(input_str):
 
         elif word == "dup":
             dup(stack)
+
+        elif word == "drop":
+            drop(stack)
 
         elif word == '.':
             if stack:
