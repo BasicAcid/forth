@@ -20,7 +20,7 @@ def bin_op(stack, word):
     elif word == "*":
         return stack.append(op_1 * op_2)
     elif word == "/":
-        return stack.append(op_1 / op_2)
+        return stack.append(op_1 // op_2)
 
 def dup(stack):
     if stack:
@@ -38,9 +38,14 @@ def drop(stack):
 def swap(stack):
     if len(stack) < 2:
         print(f"Error: Not enough args for: swap")
-        return
     else:
         stack[-1], stack[-2] = stack[-2], stack[-1]
+
+def over(stack):
+    if len(stack) < 2:
+        print(f"Error: Not enough args for: over")
+    else:
+        stack.append(stack[-2])
 
 def execute(input_str):
 
@@ -64,6 +69,9 @@ def execute(input_str):
 
         elif word == "swap":
             swap(stack)
+
+        elif word == "over":
+            over(stack)
 
         elif word == '.':
             if stack:
