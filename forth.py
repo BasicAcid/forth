@@ -10,7 +10,7 @@ def execute(input_str):
             stack.append(int(word))
         elif word == '+':
             if len(stack) < 2:
-                print("Error: Not enough operands for addition.")
+                print(f"Error: Not enough operands for: {word}")
                 return
             else:
                 operand2 = stack.pop()
@@ -19,7 +19,7 @@ def execute(input_str):
                 stack.append(result)
         elif word == '-':
             if len(stack) < 2:
-                print("Error: Not enough operands for addition.")
+                print(f"Error: Not enough operands for: {word}")
                 return
             else:
                 operand2 = stack.pop()
@@ -28,7 +28,7 @@ def execute(input_str):
                 stack.append(result)
         elif word == '*':
             if len(stack) < 2:
-                print("Error: Not enough operands for addition.")
+                print(f"Error: Not enough operands for: {word}")
                 return
             else:
                 operand2 = stack.pop()
@@ -37,7 +37,7 @@ def execute(input_str):
                 stack.append(result)
         elif word == '/':
             if len(stack) < 2:
-                print("Error: Not enough operands for addition.")
+                print(f"Error: Not enough operands for: {word}")
                 return
             else:
                 operand2 = stack.pop()
@@ -45,12 +45,16 @@ def execute(input_str):
                 result = operand1 / operand2
                 stack.append(result)
 
-    if stack:
-        print("Result:", stack[-1])
-    else:
-        print("Stack is empty.")
+        elif word == '.':
+            if stack:
+                print(stack.pop())
+            else:
+                print("Stack is empty.")
+        else:
+            print("Unknown word:", word)
 
-execute("5 3 +")
-execute("5 3 -")
-execute("5 3 *")
-execute("5 3 /")
+while True:
+    input_str = input("Forth> ")
+    if input_str.lower() == 'quit':
+        break
+    execute(input_str)
