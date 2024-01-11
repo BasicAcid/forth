@@ -3,7 +3,6 @@
 stack = []
 definitions = {}
 
-
 def bin_op(stack, word):
 
     if len(stack) < 2:
@@ -59,18 +58,11 @@ def emit(stack):
     else:
         print("drop fail: Stack is empty.")
 
-def cr(stack):
+def cr():
     print("\n")
 
-def nip(stack):
-    swap(stack)
-    drop(stack)
-
-def peek(stack):
-    """
-    TODO
-    .S non-destructive print.
-    """
+def def_str(stack):
+    print(stack)
     pass
 
 def execute(input_str):
@@ -102,6 +94,10 @@ def execute(input_str):
         elif word == "rot":
             rot(stack)
 
+        elif word == "-rot":
+            rot(stack)
+            rot(stack)
+
         elif word == "emit":
             emit(stack)
 
@@ -109,10 +105,19 @@ def execute(input_str):
             cr(stack)
 
         elif word == "nip":
-            nip(stack)
+            swap(stack)
+            drop(stack)
+
+        elif word == "tuck":
+            swap(stack)
+            over(stack)
+
+        elif word == ".\"":
+            #def_str(stack)
+            print(word)
 
         elif word == ".S":
-            peek(stack)
+            print(stack)
 
         elif word == '.':
             if stack:
@@ -150,12 +155,15 @@ def define_word(words, start_index):
 
     return end_index
 
-while True:
-    # TODO
-    # This is problematic, because the input function add a new line.
-    # That's not the case on most implementations.
-    input_str = input("Forth> ")
 
-    if input_str.lower() == 'quit':
-        break
-    execute(input_str)
+if __name__ == '__main__':
+
+    while True:
+        # TODO
+        # This is problematic, because the input function add a new line.
+        # That's not the case on most implementations.
+        input_str = input("Forth> ")
+
+        if input_str.lower() == 'quit':
+            break
+        execute(input_str)
