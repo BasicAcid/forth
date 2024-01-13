@@ -1,5 +1,9 @@
 #! /usr/bin/python3
 
+"""
+Toy forth implementation.
+"""
+
 stack = []
 definitions = {}
 
@@ -58,18 +62,14 @@ def emit(stack):
     else:
         print("drop fail: Stack is empty.")
 
-def cr():
-    print("\n")
-
-def def_str(stack):
-    print(stack)
-    pass
-
 def execute(input_str):
 
     words = input_str.split()
 
     i = 0
+
+    temp_stack = []
+
     while i < len(words):
         word = words[i]
 
@@ -102,7 +102,7 @@ def execute(input_str):
             emit(stack)
 
         elif word == "cr":
-            cr(stack)
+            print("\n")
 
         elif word == "nip":
             swap(stack)
@@ -117,7 +117,8 @@ def execute(input_str):
             print(word)
 
         elif word == ".S":
-            print(stack)
+            #print(stack)
+            print(temp_stack)
 
         elif word == '.':
             if stack:
